@@ -25,90 +25,90 @@ bool eepromWrite(eepromValues_t eepromValuesNew) {
   time before a write needs to happen with some additional data integrity checks.
   YOLO
   */
-  String errMsg = String("Data out of range");
+  const char *errMsg = "Data out of range";
 
   if (eepromValuesNew.preinfusionState != 0 && eepromValuesNew.preinfusionState != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.pressureProfilingState != 0 && eepromValuesNew.pressureProfilingState != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.preinfusionFlowState != 0 && eepromValuesNew.preinfusionFlowState != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.preinfusionFlowVol < 0.f) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.flowProfileStart < 0.f) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.flowProfileEnd < 0.f) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.flowProfileState != 0 && eepromValuesNew.flowProfileState != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.homeOnShotFinish != 0 && eepromValuesNew.homeOnShotFinish != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.graphBrew != 0 && eepromValuesNew.graphBrew != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.warmupState != 0 && eepromValuesNew.warmupState != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.brewDeltaState != 0 && eepromValuesNew.brewDeltaState != 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.pressureProfilingStart < 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.pressureProfilingFinish < 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.setpoint < 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.mainDivider < 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.brewDivider < 1) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
   if (eepromValuesNew.powerLineFrequency != 50 && eepromValuesNew.powerLineFrequency != 60) {
-    LOG_ERROR(errMsg.c_str());
+    LOG_ERROR(errMsg);
     return false;
   }
 
@@ -155,9 +155,13 @@ eepromValues_t getEepromDefaults(void) {
   defaultData.homeOnShotFinish               = true;
   defaultData.graphBrew                      = true;
   defaultData.brewDeltaState                 = true;
-  defaultData.scalesF1                       = 4210.f;
-  defaultData.scalesF2                       = 3920.f;
-  defaultData.pumpFlowAtZero                 = 0.24f;
+  defaultData.scalesF1                       = 3920.f;
+  defaultData.scalesF2                       = 4210.f;
+  defaultData.pumpFlowAtZero                 = 0.28f;
+  defaultData.stopOnWeightState              = false;
+  defaultData.shotDose                       = 18.0f;
+  defaultData.shotStopOnCustomWeight         = 0.f;
+  defaultData.shotPreset                     = 0;
 
   return defaultData;
 }
